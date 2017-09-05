@@ -4,7 +4,8 @@ import BookShelf from './components/bookShelf';
 import { Link } from 'react-router-dom';
 
 const initialState = {
-  books: []
+  books: [],
+  savedBooks: []
 };
 
 class Search extends Component {
@@ -14,10 +15,14 @@ class Search extends Component {
     this.state = initialState;
     this.renderShelf = this.renderShelf.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this.fetchBooks = this.fetchBooks.bind(this);
   }
 
+  componentDidMount() {
+    this.fetchBooks();
+  }
   renderShelf() {
-    const { books } = this.state;
+    const { books, savedBooks } = this.state;
 
     if (!books || books.length <= 0) {
       return (
@@ -29,6 +34,8 @@ class Search extends Component {
         key="serch-shelf"
         type="Search"
         books={books}
+        savedBooks={savedBooks}
+        bookUpdate={this.fetchBooks}
       />
     );
   }
@@ -39,6 +46,11 @@ class Search extends Component {
       });
     }
 
+  }
+  fetchBooks() {
+    BooksAPI.getAll().then((savedBooks) => {
+      this.setState({ savedBooks });
+    });
   }
   render() {
     return (

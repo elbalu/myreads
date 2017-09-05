@@ -8,7 +8,7 @@ const BookList = props => {
     props.bookUpdate(shelf);
   }
 
-    const { books } = props;
+    const { books, savedBooks } = props;
     if(!books || books.error) {
       return (
         <div>no books...</div>
@@ -22,6 +22,7 @@ const BookList = props => {
               key={book.id}
               book={book}
               bookUpdate={bookUpdate}
+              savedBooks={savedBooks}
             />
           ))
         }
@@ -31,7 +32,8 @@ const BookList = props => {
 
 BookList.propTypes = {
   books: PropTypes.arrayOf(PropTypes.object),
-  bookUpdate: PropTypes.func
+  bookUpdate: PropTypes.func,
+  savedBooks: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default BookList;

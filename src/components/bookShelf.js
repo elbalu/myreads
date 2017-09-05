@@ -7,7 +7,7 @@ const BookShelf = (props) => {
     props.bookUpdate(shelf);
   }
 
-  const { type, books } = props;
+  const { type, books, savedBooks } = props;
 
   return (
     <div>
@@ -18,6 +18,7 @@ const BookShelf = (props) => {
             key={`list-${type}`}
             books={books}
             bookUpdate={bookUpdate}
+            savedBooks={savedBooks}
           />
         </div>
       </div>
@@ -28,6 +29,7 @@ const BookShelf = (props) => {
 BookShelf.propTypes = {
   type: PropTypes.string,
   books: PropTypes.arrayOf(PropTypes.object),
+  savedBooks: PropTypes.arrayOf(PropTypes.object),
   bookUpdate: PropTypes.func
 };
 export default BookShelf;
